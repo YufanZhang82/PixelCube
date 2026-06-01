@@ -794,4 +794,87 @@ a:focus {
 }
 
 
+/* Pipeline image switcher */
+.pipeline-section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
 
+.pipeline-viewer {
+  position: relative;
+  width: 100%;
+  margin: 1.5rem auto 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f5f5f5;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.pipeline-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: opacity 0.25s ease-in-out;
+}
+
+.pipeline-image.fade-out {
+  opacity: 0;
+}
+
+.pipeline-switch {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+  z-index: 5;
+}
+
+.pipeline-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pipeline-btn:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.pipeline-btn.active {
+  color: #fff;
+  background: #111;
+}
+
+.pipeline-caption {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1.05rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+/* Mobile adjustment */
+@media screen and (max-width: 768px) {
+  .pipeline-switch {
+    top: 10px;
+    right: 10px;
+    gap: 4px;
+    padding: 4px;
+  }
+
+  .pipeline-btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+}

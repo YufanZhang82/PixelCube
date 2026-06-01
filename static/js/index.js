@@ -140,3 +140,40 @@ $(document).ready(function() {
     setupVideoCarouselAutoplay();
 
 })
+
+function switchPipeline(mode) {
+  const image = document.getElementById("pipeline-image");
+  const caption = document.getElementById("pipeline-caption");
+  const btnDelight = document.getElementById("btn-delight");
+  const btnRelight = document.getElementById("btn-relight");
+
+  const pipelineData = {
+    delight: {
+      src: "static/images/pipeline_delight.jpg",
+      alt: "Pixel Cube Delight Pipeline",
+      caption: "Delight stage: extracting illumination-independent portrait appearance from the input video."
+    },
+    relight: {
+      src: "static/images/pipeline_relight.jpg",
+      alt: "Pixel Cube Relight Pipeline",
+      caption: "Relight stage: generating temporally consistent portrait videos under target environment lighting."
+    }
+  };
+
+  if (!pipelineData[mode]) {
+    return;
+  }
+
+  image.classList.add("fade-out");
+
+  setTimeout(() => {
+    image.src = pipelineData[mode].src;
+    image.alt = pipelineData[mode].alt;
+    caption.textContent = pipelineData[mode].caption;
+
+    btnDelight.classList.toggle("active", mode === "delight");
+    btnRelight.classList.toggle("active", mode === "relight");
+
+    image.classList.remove("fade-out");
+  }, 180);
+}
