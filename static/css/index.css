@@ -369,9 +369,9 @@ body {
 
 /* Content Improvements */
 .content.has-text-justified {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #444;
 }
 
 .content.has-text-justified p {
@@ -886,4 +886,405 @@ a:focus {
   max-width: 100%;
   border-radius: 8px;
   background: #000;
+}
+
+/* ============================================================
+   Pixel Cube result viewers: de-lighting / relighting
+   ============================================================ */
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.demo-coming-soon-box {
+  background: var(--background-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.demo-coming-soon-box h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0.75rem 0 0.5rem;
+  color: var(--text-primary);
+}
+
+.demo-coming-soon-box p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.demo-discord-icon {
+  width: 3rem;
+  height: 3rem;
+  font-size: 2rem;
+  color: #5865f2;
+}
+
+.pixelcube-results-section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.pixelcube-results-section.is-light-result {
+  background: var(--background-secondary);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.pc-section-intro {
+  max-width: 760px;
+  margin: -0.5rem auto 2rem auto !important;
+  color: var(--text-secondary);
+  font-size: 1.05rem !important;
+  line-height: 1.7;
+}
+
+.pc-relight-group {
+  margin-top: 3rem;
+}
+
+.pc-relight-heading {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 800 !important;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem !important;
+}
+
+.pc-relight-subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.pc-viewer {
+  background: var(--background-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 1.25rem;
+  margin: 1.5rem auto 2.5rem;
+}
+
+.pc-viewer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.pc-viewer-title-block {
+  text-align: left;
+}
+
+.pc-viewer-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.pc-viewer-caption {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0.25rem 0 0;
+}
+
+.pc-stage-wrap {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) 52px;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pc-video-stage {
+  position: relative;
+  width: 512px;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: var(--border-radius-lg);
+  background: #000;
+  box-shadow: var(--shadow-md);
+  margin: 0 auto;
+}
+
+.pc-video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.pc-video.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.pc-nav-arrow {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 999px;
+  background: var(--text-primary);
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+}
+
+.pc-nav-arrow:hover {
+  transform: translateY(-2px);
+  background: var(--primary-color);
+  box-shadow: var(--shadow-lg);
+}
+
+.pc-nav-arrow:active {
+  transform: translateY(0);
+}
+
+.pc-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.pc-control-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pc-control-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-right: 0.25rem;
+}
+
+.pc-switch-btn,
+.pc-dot-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  background: var(--background-accent);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.pc-dot-btn {
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0;
+}
+
+.pc-switch-btn:hover,
+.pc-dot-btn:hover {
+  transform: translateY(-1px);
+  background: #e5e7eb;
+}
+
+.pc-switch-btn.active,
+.pc-dot-btn.active {
+  background: var(--text-primary);
+  color: #fff;
+  box-shadow: var(--shadow-md);
+}
+
+.pc-compact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.pc-card-note {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  text-align: center;
+  margin-top: 0.75rem;
+}
+
+@media screen and (max-width: 768px) {
+  .pixelcube-results-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .pc-viewer {
+    padding: 0.9rem;
+  }
+
+  .pc-viewer-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .pc-stage-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .pc-nav-arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .pc-stage-wrap .pc-nav-arrow:first-child,
+  .pc-stage-wrap .pc-nav-arrow:last-child {
+    display: none;
+  }
+
+  .pc-switch-btn {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.82rem;
+  }
+
+  .pc-dot-btn {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* ============================================================
+   Larger one-line Supplementary Video section
+   ============================================================ */
+
+.supplementary-video-section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.supplementary-video-container {
+  width: min(92vw, 1180px);
+  margin: 0 auto;
+}
+
+.supplementary-video-card {
+  width: 100%;
+  padding: 1rem;
+  background: var(--background-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-xl);
+}
+
+.supplementary-video-card .publication-video,
+.supplementary-publication-video {
+  width: 100% !important;
+  padding-bottom: 56.25% !important;
+  box-shadow: none !important;
+  border-radius: var(--border-radius-lg) !important;
+}
+
+.supplementary-video-card .publication-video:hover,
+.supplementary-publication-video:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+@media screen and (max-width: 768px) {
+  .supplementary-video-container {
+    width: min(94vw, 1180px);
+  }
+
+  .supplementary-video-card {
+    padding: 0.6rem;
+  }
+}
+
+.pc-controls-top .pc-control-row {
+  margin-bottom: 1.0rem !important;
+}
+
+/* ============================================================
+   Unify teaser caption / pipeline caption / abstract text
+   Target style: teaser caption
+   ============================================================ */
+
+:root {
+  --pc-unified-caption-font-size: 1.25rem;
+  --pc-unified-caption-line-height: 1.5;
+  --pc-unified-caption-color: #4a4a4a;
+  --pc-unified-caption-weight: 400;
+}
+
+/* Teaser caption */
+.teaser .subtitle,
+.teaser h2.subtitle,
+.teaser .hero-body .subtitle {
+  font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: var(--pc-unified-caption-font-size) !important;
+  line-height: var(--pc-unified-caption-line-height) !important;
+  color: var(--pc-unified-caption-color) !important;
+  font-weight: var(--pc-unified-caption-weight) !important;
+}
+
+/* Pipeline caption */
+#pipeline-caption,
+.pipeline-caption {
+  margin-top: 1.5rem !important;
+  font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: var(--pc-unified-caption-font-size) !important;
+  line-height: var(--pc-unified-caption-line-height) !important;
+  color: var(--pc-unified-caption-color) !important;
+  font-weight: var(--pc-unified-caption-weight) !important;
+}
+
+/* Abstract body text */
+#main-content .content.has-text-justified,
+#main-content .content.has-text-justified p {
+  font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: var(--pc-unified-caption-font-size) !important;
+  line-height: var(--pc-unified-caption-line-height) !important;
+  color: var(--pc-unified-caption-color) !important;
+  font-weight: var(--pc-unified-caption-weight) !important;
+}
+
+/* Abstract paragraph spacing */
+#main-content .content.has-text-justified p {
+  margin-bottom: 1.25rem !important;
+}
+
+/* Keep them consistent on mobile too */
+@media screen and (max-width: 768px) {
+  .teaser .subtitle,
+  .teaser h2.subtitle,
+  .teaser .hero-body .subtitle,
+  #pipeline-caption,
+  .pipeline-caption,
+  #main-content .content.has-text-justified,
+  #main-content .content.has-text-justified p {
+    font-size: var(--pc-unified-caption-font-size) !important;
+    line-height: var(--pc-unified-caption-line-height) !important;
+  }
 }

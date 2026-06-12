@@ -108,7 +108,7 @@
   <script defer src="static/js/bulma-carousel.min.js"></script>
   <script defer src="static/js/bulma-slider.min.js"></script>
   <script defer src="static/js/index.js"></script>
-  
+  <script defer src="static/js/pixelcube-results.js"></script>
   <!-- Structured Data for Academic Papers -->
   <script type="application/ld+json">
   {
@@ -254,14 +254,16 @@
                       </a>
                     </span>
 
-                    <!-- TODO: Add your supplementary material PDF or remove this section -->
+                    <!-- Demo button: disabled until the demo / Discord link is ready -->
                     <span class="link-block">
-                      <a href="https://youtu.be/BoNlGqSFoWs" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
+                      <a href="#"
+                      onclick="return false;"
+                      aria-disabled="true"
+                      class="external-link button is-normal is-rounded is-dark demo-coming-soon-link">
                       <span class="icon">
-                        <i class="fas fa-video"></i>
+                        <i class="fab fa-discord"></i>
                       </span>
-                      <span>Supplementary Video</span>
+                      <span>Demo (coming soon)</span>
                     </a>
                   </span>
 
@@ -302,8 +304,17 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <!-- TODO: Replace with your teaser video -->
-      <video poster="" id="tree" autoplay controls muted loop height="160%" preload="metadata">
-        <!-- TODO: Add your video file path here -->
+      <video
+        poster=""
+        id="tree"
+        autoplay
+        muted
+        loop
+        playsinline
+        oncontextmenu="return false;"
+        height="160%"
+        preload="metadata"
+      >
         <source src="static/videos/teaser_video.mp4" type="video/mp4">
       </video>
 
@@ -377,31 +388,62 @@
 
 
 <!-- Youtube video -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Supplementary Video</h2>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          
-          <div class="publication-video">
-            <!-- TODO: Replace with your YouTube video ID -->
-            <iframe
-              src="https://www.youtube.com/embed/BoNlGqSFoWs?rel=0"
-              title="Pixel Cube Supplementary Video"
-              frameborder="0"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen>
-            </iframe>
-          </div>
-        </div>
+<!-- Supplementary Video -->
+<section class="section hero is-light supplementary-video-section" id="supplementary-video">
+  <div class="supplementary-video-container">
+    <h2 class="title is-3 gradient-title has-text-centered">
+      Supplementary Video
+    </h2>
+
+    <div class="section-video-card supplementary-video-card">
+      <div class="publication-video supplementary-publication-video">
+        <iframe
+          src="https://www.youtube.com/embed/BoNlGqSFoWs?rel=0"
+          title="Pixel Cube Supplementary Video"
+          frameborder="0"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
       </div>
     </div>
   </div>
 </section>
+
+<!-- End Supplementary Video -->
 <!-- End youtube video -->
+
+<!-- Delight Results -->
+<section class="section pixelcube-results-section" id="delight-results">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 gradient-title has-text-centered">Delighting Results</h2>
+    <div id="pixelcube-delight-root"></div>
+  </div>
+</section>
+<!-- End Delight Results -->
+
+<!-- Relighting Results -->
+<section class="section pixelcube-results-section is-light-result" id="relight-results">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 gradient-title has-text-centered">Relighting Results</h2>
+
+    <div class="pc-relight-group">
+      <h3 class="title is-4 pc-relight-heading">Diverse Subjects and Scenes</h3>
+      <div id="pixelcube-relight-diverse-root"></div>
+    </div>
+
+    <div class="pc-relight-group">
+      <h3 class="title is-4 pc-relight-heading">Dynamic Lighting Scenes</h3>
+      <div id="pixelcube-relight-dynamic-root"></div>
+    </div>
+
+    <div class="pc-relight-group">
+      <h3 class="title is-4 pc-relight-heading">Same Identity, Switchable Backgrounds</h3>
+      <div id="pixelcube-relight-background-root"></div>
+    </div>
+  </div>
+</section>
+<!-- End Relighting Results -->
 
 
 <!-- Video carousel -->
@@ -467,16 +509,16 @@
 <!-- End Dynamic Lighting Results -->
 
 <!-- More Relighting Results -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">More Relighting Results</h2>
+<section class="section more-relighting-section" id="more-relighting-results">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 gradient-title">More Relighting Results</h2>
 
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
+        <div class="section-video-card">
           <video
             id="video-relighting1"
-            class="local-video"
+            class="local-video section-local-video"
             autoplay
             controls
             muted
@@ -488,7 +530,6 @@
           </video>
         </div>
       </div>
-
     </div>
   </div>
 </section>
