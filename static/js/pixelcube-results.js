@@ -589,192 +589,168 @@
   }
 
   function initRelightDynamic() {
-    const root = document.getElementById("pixelcube-relight-dynamic-root");
-    if (!root) return;
+  const root = document.getElementById("pixelcube-relight-dynamic-root");
+  if (!root) return;
 
-    // Changed from 4 dynamic examples to 3 dynamic examples.
-    const subjects = Array.from({ length: 3 }, (_, i) => {
-      const id = `dynamic${pad2(i + 1)}`;
+  // 3 dynamic examples only: dynamic01, dynamic02, dynamic03
+  const subjects = Array.from({ length: 3 }, (_, i) => {
+    const id = `dynamic${pad2(i + 1)}`;
 
-      return {
-        value: id,
-        label: `Dynamic ${i + 1}`,
-        basePath: `static/videos/relight/dynamic/${id}`
-      };
-    });
-
-    const lightingOptions = [
-      {
-        label: "Envmap",
-        value: "envmap",
-        filename: "relight_envmap.mp4"
-      },
-      {
-        label: "Color Light 1",
-        value: "color1",
-        filename: "relight_color1.mp4"
-      },
-      {
-        label: "Color Light 2",
-        value: "color2",
-        filename: "relight_color2.mp4"
-      }
-    ];
-
-    const state = {
-      mode: "origin",
-      subject: subjects[0].value,
-      lighting: lightingOptions[0].value
+    return {
+      value: id,
+      label: `Dynamic ${i + 1}`,
+      basePath: `static/videos/relight/dynamic/${id}`
     };
+  });
 
-    function subjectIndex() {
-      return subjects.findIndex((s) => s.value === state.subject);
+  const modes = [
+    {
+      label: "Origin",
+      value: "origin",
+      filename: "origin.mp4"
+    },
+    {
+      label: "Envmap",
+      value: "envmap",
+      filename: "relight_envmap.mp4"
+    },
+    {
+      label: "Color Light 1",
+      value: "color1",
+      filename: "relight_color1.mp4"
+    },
+    {
+      label: "Color Light 2",
+      value: "color2",
+      filename: "relight_color2.mp4"
     }
+  ];
 
-    createViewer({
-      root,
-      state,
-      modes: [
-        { label: "Original", value: "origin" },
-        { label: "Relight", value: "relight" }
-      ],
-      subjects,
-      lightingOptions,
-      getVideoKey: () => {
-        if (state.mode === "origin") {
-          return `${state.subject}-origin`;
-        }
+  const state = {
+    mode: "origin",
+    subject: subjects[0].value
+  };
 
-        return `${state.subject}-${state.lighting}`;
-      },
-      getGroupKey: () => state.subject,
-      getVideoSources: () => {
-        const sources = [];
-
-        subjects.forEach((subject) => {
-          sources.push({
-            key: `${subject.value}-origin`,
-            group: subject.value,
-            src: `${subject.basePath}/origin.mp4`
-          });
-
-          lightingOptions.forEach((lighting) => {
-            sources.push({
-              key: `${subject.value}-${lighting.value}`,
-              group: subject.value,
-              src: `${subject.basePath}/${lighting.filename}`
-            });
-          });
-        });
-
-        return sources;
-      },
-      onPrev: () => {
-        const idx = subjectIndex();
-        state.subject = subjects[(idx - 1 + subjects.length) % subjects.length].value;
-      },
-      onNext: () => {
-        const idx = subjectIndex();
-        state.subject = subjects[(idx + 1) % subjects.length].value;
-      }
-    });
+  function subjectIndex() {
+    return subjects.findIndex((s) => s.value === state.subject);
   }
 
-  function initRelightBackground() {
-    const root = document.getElementById("pixelcube-relight-background-root");
-    if (!root) return;
+  createViewer({
+    root,
+    state,
+    modes,
+    subjects,
+    getVideoKey: () => `${state.subject}-${state.mode}`,
+    getGroupKey: () => state.subject,
+    getVideoSources: () => {
+      const sources = [];
 
-    const subjects = Array.from({ length: 3 }, (_, i) => {
-      const id = `identity${pad2(i + 1)}`;
-
-      return {
-        value: id,
-        label: `Identity ${i + 1}`,
-        basePath: `static/videos/relight/background/${id}`
-      };
-    });
-
-    const backgroundOptions = [
-      {
-        label: "Scene 1",
-        value: "scene1",
-        filename: "relight_scene1.mp4"
-      },
-      {
-        label: "Scene 2",
-        value: "scene2",
-        filename: "relight_scene2.mp4"
-      },
-      {
-        label: "Scene 3",
-        value: "scene3",
-        filename: "relight_scene3.mp4"
-      },
-      {
-        label: "Scene 4",
-        value: "scene4",
-        filename: "relight_scene4.mp4"
-      }
-    ];
-
-    const state = {
-      mode: "relight",
-      subject: subjects[0].value,
-      background: backgroundOptions[0].value
-    };
-
-    function subjectIndex() {
-      return subjects.findIndex((s) => s.value === state.subject);
-    }
-
-    createViewer({
-      root,
-      state,
-      modes: [
-        { label: "Original", value: "origin" },
-        { label: "Relight", value: "relight" }
-      ],
-      subjects,
-      backgroundOptions,
-      getVideoKey: () => {
-        if (state.mode === "origin") {
-          return `${state.subject}-origin`;
-        }
-
-        return `${state.subject}-${state.background}`;
-      },
-      getGroupKey: () => state.subject,
-      getVideoSources: () => {
-        const sources = [];
-
-        subjects.forEach((subject) => {
+      subjects.forEach((subject) => {
+        modes.forEach((mode) => {
           sources.push({
-            key: `${subject.value}-origin`,
+            key: `${subject.value}-${mode.value}`,
             group: subject.value,
-            src: `${subject.basePath}/origin.mp4`
-          });
-
-          backgroundOptions.forEach((bg) => {
-            sources.push({
-              key: `${subject.value}-${bg.value}`,
-              group: subject.value,
-              src: `${subject.basePath}/${bg.filename}`
-            });
+            src: `${subject.basePath}/${mode.filename}`
           });
         });
+      });
 
-        return sources;
-      },
-      onPrev: () => {
-        const idx = subjectIndex();
-        state.subject = subjects[(idx - 1 + subjects.length) % subjects.length].value;
-      },
-      onNext: () => {
-        const idx = subjectIndex();
-        state.subject = subjects[(idx + 1) % subjects.length].value;
-      }
-    });
+      return sources;
+    },
+    onPrev: () => {
+      const idx = subjectIndex();
+      state.subject = subjects[(idx - 1 + subjects.length) % subjects.length].value;
+    },
+    onNext: () => {
+      const idx = subjectIndex();
+      state.subject = subjects[(idx + 1) % subjects.length].value;
+    }
+  });
+}
+
+function initRelightBackground() {
+  const root = document.getElementById("pixelcube-relight-background-root");
+  if (!root) return;
+
+  const subjects = Array.from({ length: 3 }, (_, i) => {
+    const id = `identity${pad2(i + 1)}`;
+
+    return {
+      value: id,
+      label: `Identity ${i + 1}`,
+      basePath: `static/videos/relight/background/${id}`
+    };
+  });
+
+  const modes = [
+    {
+      label: "Original",
+      value: "origin",
+      filename: "origin.mp4"
+    },
+    {
+      label: "Scene 1",
+      value: "scene1",
+      filename: "relight_scene1.mp4"
+    },
+    {
+      label: "Scene 2",
+      value: "scene2",
+      filename: "relight_scene2.mp4"
+    },
+    {
+      label: "Scene 3",
+      value: "scene3",
+      filename: "relight_scene3.mp4"
+    },
+    {
+      label: "Scene 4",
+      value: "scene4",
+      filename: "relight_scene4.mp4"
+    }
+  ];
+
+  const state = {
+    mode: "origin",
+    subject: subjects[0].value
+  };
+
+  function subjectIndex() {
+    return subjects.findIndex((s) => s.value === state.subject);
   }
+
+  createViewer({
+    root,
+    state,
+    modes,
+    subjects,
+    getVideoKey: () => `${state.subject}-${state.mode}`,
+    getGroupKey: () => state.subject,
+    getVideoSources: () => {
+      const sources = [];
+
+      subjects.forEach((subject) => {
+        modes.forEach((mode) => {
+          sources.push({
+            key: `${subject.value}-${mode.value}`,
+            group: subject.value,
+            src: `${subject.basePath}/${mode.filename}`
+          });
+        });
+      });
+
+      return sources;
+    },
+    onPrev: () => {
+      const idx = subjectIndex();
+      state.subject = subjects[(idx - 1 + subjects.length) % subjects.length].value;
+    },
+    onNext: () => {
+      const idx = subjectIndex();
+      state.subject = subjects[(idx + 1) % subjects.length].value;
+    }
+  });
+}
 
   document.addEventListener("DOMContentLoaded", () => {
     initDelight();

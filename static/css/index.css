@@ -1232,7 +1232,7 @@ textarea {
    ============================================================ */
 
 :root {
-  --pc-unified-caption-font-size: 1.25rem;
+  --pc-unified-caption-font-size: 1.05rem;
   --pc-unified-caption-line-height: 1.5;
   --pc-unified-caption-color: #4a4a4a;
   --pc-unified-caption-weight: 400;
@@ -1272,7 +1272,7 @@ textarea {
 
 /* Abstract paragraph spacing */
 #main-content .content.has-text-justified p {
-  margin-bottom: 1.25rem !important;
+  margin-bottom: 1.05rem !important;
 }
 
 /* Keep them consistent on mobile too */

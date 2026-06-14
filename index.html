@@ -336,7 +336,13 @@
         <div class="content has-text-justified">
           <!-- TODO: Replace with your paper abstract -->
           <p>
-            We present a diffusion-based method for relighting dynamic portrait videos with photorealism and temporal consistency. Our method is fueled by a hybrid training dataset that consists of real-captured and rendered dynamic portrait videos with diverse subject appearances, facial motions, head poses, and known lighting conditions. Specifically, we construct an LED-based lighting system for realistic lighting emulation and high-speed video relighting data acquisition. By leveraging the image priors embedded in pre-trained video diffusion models, and using per-frame high dynamic range (HDR) environment map as lighting control, we train a high-performance generative model for realistic and identity-preserving dynamic portrait video relighting. In addition to the environment map control, our model uses a synthesized background image to enable control on the camera's exposure level and color tone. Our model can produce temporally consistent relit portrait video that looks realistic and harmonious under a provided new environment and faithfully preserve the subject's expression and fine facial features, including skin tone, wrinkles, and facial hair. Our model generalizes well to unseen data, in terms of the subject appearance, motion, and lighting condition. We perform extensive experiments on relighting in-the-wild videos with various environment maps and demonstrate practical applications on portrait photography. Results show that our method achieves state-of-the-art performance in photorealism, lighting harmony, and temporal consistency.
+            We present a diffusion-based method for photorealistic and temporally consistent portrait video relighting.
+            Our model is trained on a hybrid dataset of real-captured and rendered dynamic portraits with diverse appearances,
+            motions, poses, and known lighting conditions. To acquire realistic training data, we build an LED-based lighting
+            system for high-speed video capture under controllable illumination. Using HDR environment maps and synthesized
+            background images as controls, our model relights in-the-wild portrait videos while preserving identity,
+            expressions, skin tone, wrinkles, and facial hair. Experiments show that our method generalizes well to unseen
+            subjects, motions, and lighting, achieving high-quality results in realism, lighting harmony, and temporal consistency.
           </p>
         </div>
       </div>
