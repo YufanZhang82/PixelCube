@@ -1288,3 +1288,26 @@ textarea {
     line-height: var(--pc-unified-caption-line-height) !important;
   }
 }
+
+/* Reduce affiliation vertical spacing on mobile / desktop */
+.publication-authors {
+  margin-bottom: 0.6rem !important;
+  line-height: 1.25 !important;
+}
+
+.institution-row {
+  row-gap: 0.25rem !important;
+  column-gap: 1.5rem !important;
+  margin-top: 0 !important;
+  margin-bottom: 0.4rem !important;
+  line-height: 1.25 !important;
+}
+
+.institution-row .author-block {
+  line-height: 1.25 !important;
+}
+
+.pipeline-viewer {
+  background: #fff !important;
+  padding-bottom: 16px !important;
+}
